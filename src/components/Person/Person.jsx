@@ -13,11 +13,14 @@ import { StyledButton, StyledContainer, StyledForm, StyledInput, StyledLable, St
   };
 
   useEffect(() => {
-    personAPI.getPersonList({ search: name ? name : "" }).then((data)=>{
-       setData(data?.data?.data)
-    });
-    form.resetFields();
-    setVisible(false)
+    if(name && name.length > 0)
+    {
+      personAPI.getPersonList({ search: name ? name : "" }).then((data) => {
+        setData(data?.data?.data);
+      });
+      form.resetFields();
+      setVisible(false);
+    }
   }, [name]);
 
 
@@ -54,6 +57,8 @@ import { StyledButton, StyledContainer, StyledForm, StyledInput, StyledLable, St
             Submit
           </StyledButton>
         </Form.Item>
+        To search you can type names like : Hazel , Grace , Nova , Ellie ,
+        Olivia , Emma , Sophia , Ava , Nora ,Isabella
       </StyledForm>
       <StyledTable columns={columns} dataSource={data} pagination={false} />
     </StyledContainer>
